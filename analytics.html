@@ -274,30 +274,70 @@
 
         // Load and display analytics
         function loadAnalytics() {
-            // Update stats
+            // Update stats with real data
             document.getElementById('totalVisitors').textContent = analyticsData.visitors.length;
-            document.getElementById('uniqueVisitors').textContent = analyticsData.uniqueIPs.size;
+            document.getElementById('uniqueVisitors').textContent = analyticsData.uniqueIPs.length || analyticsData.uniqueIPs.size || 0;
             document.getElementById('pageViews').textContent = analyticsData.pageViews;
             
-            // Calculate average time (mock data for demo)
-            const avgTime = Math.floor(Math.random() * 5) + 1;
-            document.getElementById('avgTime').textContent = avgTime + 'm';
+            // Calculate real average time from visitor data
+            let totalTime = 0;
+            let timeCount = 0;
+            analyticsData.visitors.forEach(visitor => {
+                if (visitor.timeOnPage) {
+                    totalTime += visitor.timeOnPage;
+                    timeCount++;
+                }
+            });
+            const avgTime = timeCount > 0 ? Math.round(totalTime / timeCount) : 0;
+            document.getElementById('avgTime').textContent = avgTime + 's';
 
-            // Create charts
+            // Create charts with real data
             createCharts();
             displayRecentVisitors();
         }
 
         // Create analytics charts
         function createCharts() {
+            // Process real visitor data
+            const countryData = {};
+            const sourceData = {};
+            const deviceData = { Desktop: 0, Mobile: 0, Tablet: 0 };
+            const browserData = {};
+            
+            analyticsData.visitors.forEach(visitor => {
+                // Country data
+                const country = visitor.country || 'Unknown';
+                countryData[country] = (countryData[country] || 0) + 1;
+                
+                // Source data
+                const source = visitor.referrer === '' ? 'Direct' : 
+                              visitor.referrer.includes('google') ? 'Google' :
+                              visitor.referrer.includes('linkedin') ? 'LinkedIn' :
+                              visitor.referrer.includes('github') ? 'GitHub' :
+                              visitor.referrer.includes('facebook') || visitor.referrer.includes('twitter') ? 'Social Media' : 'Other';
+                sourceData[source] = (sourceData[source] || 0) + 1;
+                
+                // Device data
+                if (visitor.device) {
+                    deviceData[visitor.device] = (deviceData[visitor.device] || 0) + 1;
+                }
+                
+                // Browser data
+                const browser = visitor.browser || 'Unknown';
+                browserData[browser] = (browserData[browser] || 0) + 1;
+            });
+            
             // Country Chart
             const countryCtx = document.getElementById('countryChart').getContext('2d');
+            const countryLabels = Object.keys(countryData).slice(0, 6);
+            const countryValues = countryLabels.map(label => countryData[label]);
+            
             new Chart(countryCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Pakistan', 'United States', 'United Kingdom', 'Canada', 'Germany', 'Others'],
+                    labels: countryLabels,
                     datasets: [{
-                        data: [45, 20, 15, 10, 5, 5],
+                        data: countryValues,
                         backgroundColor: ['#003366', '#004d99', '#00d4ff', '#7c3aed', '#10b981', '#f59e0b']
                     }]
                 },
@@ -313,13 +353,16 @@
 
             // Source Chart
             const sourceCtx = document.getElementById('sourceChart').getContext('2d');
+            const sourceLabels = Object.keys(sourceData);
+            const sourceValues = sourceLabels.map(label => sourceData[label]);
+            
             new Chart(sourceCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Direct', 'Google', 'LinkedIn', 'GitHub', 'Social Media'],
+                    labels: sourceLabels,
                     datasets: [{
                         label: 'Visitors',
-                        data: [35, 30, 20, 10, 5],
+                        data: sourceValues,
                         backgroundColor: '#003366'
                     }]
                 },
@@ -335,12 +378,15 @@
 
             // Device Chart
             const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+            const deviceLabels = Object.keys(deviceData).filter(key => deviceData[key] > 0);
+            const deviceValues = deviceLabels.map(label => deviceData[label]);
+            
             new Chart(deviceCtx, {
                 type: 'pie',
                 data: {
-                    labels: ['Desktop', 'Mobile', 'Tablet'],
+                    labels: deviceLabels,
                     datasets: [{
-                        data: [60, 35, 5],
+                        data: deviceValues,
                         backgroundColor: ['#003366', '#004d99', '#00d4ff']
                     }]
                 },
@@ -356,13 +402,16 @@
 
             // Browser Chart
             const browserCtx = document.getElementById('browserChart').getContext('2d');
+            const browserLabels = Object.keys(browserData);
+            const browserValues = browserLabels.map(label => browserData[label]);
+            
             new Chart(browserCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Others'],
+                    labels: browserLabels,
                     datasets: [{
-                        label: 'Usage %',
-                        data: [65, 20, 10, 3, 2],
+                        label: 'Visitors',
+                        data: browserValues,
                         backgroundColor: '#004d99'
                     }]
                 },
@@ -370,8 +419,7 @@
                     responsive: true,
                     scales: {
                         y: {
-                            beginAtZero: true,
-                            max: 100
+                            beginAtZero: true
                         }
                     }
                 }
@@ -382,36 +430,44 @@
         function displayRecentVisitors() {
             const container = document.getElementById('recentVisitors');
             
-            // Mock recent visitors data
-            const recentVisitors = [
-                {
-                    ip: '192.168.1.100',
-                    country: 'Pakistan',
-                    city: 'Karachi',
-                    device: 'Desktop',
-                    browser: 'Chrome',
-                    time: '2 minutes ago',
-                    pages: 3
-                },
-                {
-                    ip: '203.0.113.45',
-                    country: 'United States',
-                    city: 'New York',
-                    device: 'Mobile',
-                    browser: 'Safari',
-                    time: '15 minutes ago',
-                    pages: 1
-                },
-                {
-                    ip: '198.51.100.23',
-                    country: 'United Kingdom',
-                    city: 'London',
-                    device: 'Desktop',
-                    browser: 'Firefox',
-                    time: '1 hour ago',
-                    pages: 5
-                }
-            ];
+            if (analyticsData.visitors.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted">
+                        <i class="bi bi-people me-2"></i>No visitors yet. Share your portfolio to start collecting data!
+                    </div>
+                `;
+                return;
+            }
+            
+            // Get recent visitors (last 10)
+            const recentVisitors = analyticsData.visitors
+                .slice(-10)
+                .reverse()
+                .map(visitor => {
+                    const visitTime = new Date(visitor.timestamp);
+                    const now = new Date();
+                    const diffMs = now - visitTime;
+                    const diffMins = Math.floor(diffMs / 60000);
+                    const diffHours = Math.floor(diffMins / 60);
+                    const diffDays = Math.floor(diffHours / 24);
+                    
+                    let timeAgo;
+                    if (diffMins < 1) timeAgo = 'Just now';
+                    else if (diffMins < 60) timeAgo = `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+                    else if (diffHours < 24) timeAgo = `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+                    else timeAgo = `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+                    
+                    return {
+                        ip: visitor.ip || 'Unknown',
+                        country: visitor.country || 'Unknown',
+                        city: visitor.city || 'Unknown',
+                        device: visitor.device || 'Unknown',
+                        browser: visitor.browser || 'Unknown',
+                        time: timeAgo,
+                        pages: visitor.pagesViewed || 1,
+                        isp: visitor.isp || 'Unknown'
+                    };
+                });
 
             container.innerHTML = recentVisitors.map(visitor => `
                 <div class="visitor-item">
@@ -420,9 +476,12 @@
                             <div class="visitor-ip">${visitor.ip}</div>
                             <div class="visitor-info">
                                 <i class="bi bi-geo-alt me-1"></i>${visitor.city}, ${visitor.country} • 
-                                <i class="bi bi-${visitor.device === 'Mobile' ? 'phone' : 'laptop'} me-1"></i>${visitor.device} • 
+                                <i class="bi bi-${visitor.device === 'Mobile' ? 'phone' : visitor.device === 'Tablet' ? 'tablet' : 'laptop'} me-1"></i>${visitor.device} • 
                                 <i class="bi bi-globe me-1"></i>${visitor.browser} • 
-                                <i class="bi bi-eye me-1"></i>${visitor.pages} pages
+                                <i class="bi bi-eye me-1"></i>${visitor.pages} page${visitor.pages > 1 ? 's' : ''}
+                            </div>
+                            <div class="visitor-info mt-1">
+                                <i class="bi bi-building me-1"></i>${visitor.isp}
                             </div>
                         </div>
                         <small class="text-muted">${visitor.time}</small>

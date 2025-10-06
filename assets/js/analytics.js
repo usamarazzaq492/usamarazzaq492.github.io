@@ -12,21 +12,50 @@ class PortfolioAnalytics {
 
     async getVisitorInfo() {
         try {
-            // Get IP address and location info
-            const response = await fetch('https://api.ipify.org?format=json');
-            const ipData = await response.json();
+            // Get IP address
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
             
-            // Get detailed location info (you can use free services like ipapi.co)
-            const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
-            const locationData = await locationResponse.json();
+            // Get detailed location info using multiple free services for reliability
+            let locationData = {};
+            
+            try {
+                // Try ipapi.co first (most reliable)
+                const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                locationData = await locationResponse.json();
+            } catch (error) {
+                try {
+                    // Fallback to ip-api.com
+                    const fallbackResponse = await fetch(`http://ip-api.com/json/${ipData.ip}`);
+                    const fallbackData = await fallbackResponse.json();
+                    locationData = {
+                        country_name: fallbackData.country,
+                        city: fallbackData.city,
+                        region: fallbackData.regionName,
+                        timezone: fallbackData.timezone,
+                        org: fallbackData.isp
+                    };
+                } catch (fallbackError) {
+                    // Final fallback - basic info
+                    locationData = {
+                        country_name: 'Unknown',
+                        city: 'Unknown',
+                        region: 'Unknown',
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        org: 'Unknown'
+                    };
+                }
+            }
             
             return {
                 ip: ipData.ip,
                 country: locationData.country_name || 'Unknown',
                 city: locationData.city || 'Unknown',
                 region: locationData.region || 'Unknown',
-                timezone: locationData.timezone || 'Unknown',
-                isp: locationData.org || 'Unknown'
+                timezone: locationData.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+                isp: locationData.org || 'Unknown',
+                latitude: locationData.latitude || null,
+                longitude: locationData.longitude || null
             };
         } catch (error) {
             console.log('Using fallback visitor info');
@@ -35,8 +64,10 @@ class PortfolioAnalytics {
                 country: 'Unknown',
                 city: 'Unknown',
                 region: 'Unknown',
-                timezone: 'Unknown',
-                isp: 'Unknown'
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                isp: 'Unknown',
+                latitude: null,
+                longitude: null
             };
         }
     }
