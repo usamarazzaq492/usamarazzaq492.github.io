@@ -169,6 +169,17 @@
             <div class="text-center mb-5">
                 <h1 style="color: white; font-weight: 700;">Analytics Dashboard</h1>
                 <p style="color: rgba(255, 255, 255, 0.8);">Visitor Statistics & Insights</p>
+                <button onclick="loadAnalytics()" class="btn btn-analytics mt-2">
+                    <i class="bi bi-arrow-clockwise me-2"></i>Refresh Data
+                </button>
+                <button onclick="generateTestData()" class="btn btn-outline-light mt-2 ms-2">
+                    <i class="bi bi-plus-circle me-2"></i>Add Test Data
+                </button>
+                <div class="mt-2">
+                    <small style="color: rgba(255, 255, 255, 0.6);">
+                        Last updated: <span id="lastUpdated">Loading...</span>
+                    </small>
+                </div>
             </div>
 
             <!-- Stats Overview -->
@@ -251,8 +262,18 @@
         let analyticsData = JSON.parse(localStorage.getItem('portfolioAnalytics')) || {
             visitors: [],
             pageViews: 0,
-            uniqueIPs: new Set()
+            uniqueIPs: [],
+            sessions: [],
+            lastUpdated: new Date().toISOString()
         };
+        
+        // Convert arrays back to proper format if needed
+        if (analyticsData.uniqueIPs && !Array.isArray(analyticsData.uniqueIPs)) {
+            analyticsData.uniqueIPs = Array.from(analyticsData.uniqueIPs);
+        }
+        if (analyticsData.sessions && !Array.isArray(analyticsData.sessions)) {
+            analyticsData.sessions = Array.from(analyticsData.sessions);
+        }
 
         // Login functionality
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -274,10 +295,36 @@
 
         // Load and display analytics
         function loadAnalytics() {
+            // Reload data from localStorage
+            analyticsData = JSON.parse(localStorage.getItem('portfolioAnalytics')) || {
+                visitors: [],
+                pageViews: 0,
+                uniqueIPs: [],
+                sessions: [],
+                lastUpdated: new Date().toISOString()
+            };
+            
+            // If no data exists, show message
+            if (analyticsData.visitors.length === 0) {
+                document.getElementById('totalVisitors').textContent = '0';
+                document.getElementById('uniqueVisitors').textContent = '0';
+                document.getElementById('pageViews').textContent = '0';
+                document.getElementById('avgTime').textContent = '0s';
+                
+                // Show empty state charts
+                createEmptyCharts();
+                displayRecentVisitors();
+                return;
+            }
+            
             // Update stats with real data
             document.getElementById('totalVisitors').textContent = analyticsData.visitors.length;
-            document.getElementById('uniqueVisitors').textContent = analyticsData.uniqueIPs.length || analyticsData.uniqueIPs.size || 0;
+            document.getElementById('uniqueVisitors').textContent = analyticsData.uniqueIPs.length || 0;
             document.getElementById('pageViews').textContent = analyticsData.pageViews;
+            
+            // Update last updated time
+            const lastUpdated = analyticsData.lastUpdated ? new Date(analyticsData.lastUpdated).toLocaleString() : 'Never';
+            document.getElementById('lastUpdated').textContent = lastUpdated;
             
             // Calculate real average time from visitor data
             let totalTime = 0;
@@ -291,9 +338,52 @@
             const avgTime = timeCount > 0 ? Math.round(totalTime / timeCount) : 0;
             document.getElementById('avgTime').textContent = avgTime + 's';
 
+            // Debug: Log data to console
+            console.log('Analytics Data:', analyticsData);
+            console.log('Visitor Count:', analyticsData.visitors.length);
+
             // Create charts with real data
             createCharts();
             displayRecentVisitors();
+        }
+        
+        // Create empty state charts
+        function createEmptyCharts() {
+            const emptyData = {
+                labels: ['No data yet'],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: ['#e9ecef']
+                }]
+            };
+            
+            // Country Chart
+            new Chart(document.getElementById('countryChart').getContext('2d'), {
+                type: 'doughnut',
+                data: emptyData,
+                options: { responsive: true }
+            });
+            
+            // Source Chart
+            new Chart(document.getElementById('sourceChart').getContext('2d'), {
+                type: 'bar',
+                data: emptyData,
+                options: { responsive: true }
+            });
+            
+            // Device Chart
+            new Chart(document.getElementById('deviceChart').getContext('2d'), {
+                type: 'pie',
+                data: emptyData,
+                options: { responsive: true }
+            });
+            
+            // Browser Chart
+            new Chart(document.getElementById('browserChart').getContext('2d'), {
+                type: 'bar',
+                data: emptyData,
+                options: { responsive: true }
+            });
         }
 
         // Create analytics charts
@@ -510,6 +600,83 @@
                 ...analyticsData,
                 uniqueIPs: Array.from(analyticsData.uniqueIPs)
             }));
+        }
+
+        // Generate test data for debugging
+        function generateTestData() {
+            const testVisitors = [
+                {
+                    ip: '192.168.1.100',
+                    country: 'Pakistan',
+                    city: 'Karachi',
+                    region: 'Sindh',
+                    timezone: 'Asia/Karachi',
+                    isp: 'PTCL',
+                    device: 'Desktop',
+                    browser: 'Chrome',
+                    os: 'Windows',
+                    timestamp: new Date(Date.now() - 5 * 60000).toISOString(),
+                    referrer: '',
+                    timeOnPage: 120
+                },
+                {
+                    ip: '203.0.113.45',
+                    country: 'United States',
+                    city: 'New York',
+                    region: 'New York',
+                    timezone: 'America/New_York',
+                    isp: 'Verizon',
+                    device: 'Mobile',
+                    browser: 'Safari',
+                    os: 'iOS',
+                    timestamp: new Date(Date.now() - 15 * 60000).toISOString(),
+                    referrer: 'https://google.com',
+                    timeOnPage: 45
+                },
+                {
+                    ip: '198.51.100.23',
+                    country: 'United Kingdom',
+                    city: 'London',
+                    region: 'England',
+                    timezone: 'Europe/London',
+                    isp: 'BT',
+                    device: 'Desktop',
+                    browser: 'Firefox',
+                    os: 'macOS',
+                    timestamp: new Date(Date.now() - 60 * 60000).toISOString(),
+                    referrer: 'https://linkedin.com',
+                    timeOnPage: 180
+                }
+            ];
+            
+            let currentData = JSON.parse(localStorage.getItem('portfolioAnalytics')) || {
+                visitors: [],
+                pageViews: 0,
+                uniqueIPs: [],
+                sessions: [],
+                lastUpdated: new Date().toISOString()
+            };
+            
+            // Add test visitors
+            currentData.visitors.push(...testVisitors);
+            currentData.pageViews += testVisitors.length;
+            
+            // Add unique IPs
+            testVisitors.forEach(visitor => {
+                if (!currentData.uniqueIPs.includes(visitor.ip)) {
+                    currentData.uniqueIPs.push(visitor.ip);
+                }
+            });
+            
+            currentData.lastUpdated = new Date().toISOString();
+            
+            // Save to localStorage
+            localStorage.setItem('portfolioAnalytics', JSON.stringify(currentData));
+            
+            // Reload analytics
+            loadAnalytics();
+            
+            alert('Test data added! Check the dashboard now.');
         }
 
         // Auto-logout after 30 minutes
