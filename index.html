@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usama Razzaq - Full Stack Laravel & Flutter Developer</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">Usama Razzaq</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+            <div class="tech-grid">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="bi bi-code-slash me-2"></i>
+                            <span>Full Stack Developer</span>
+                        </div>
+                        <h1 class="display-4 fw-bold text-primary mb-3 typing-text">
+                            <span class="text-gradient">Usama Razzaq</span>
+                        </h1>
+                        <h2 class="h3 text-muted mb-4 tech-title">
+                            <span class="tech-highlight">Laravel</span> & <span class="tech-highlight">Flutter</span> Developer
+                        </h2>
+                        <p class="lead mb-4 hero-description">
+                            Passionate software engineer crafting <span class="highlight">scalable APIs</span>, 
+                            <span class="highlight">cross-platform apps</span>, and 
+                            <span class="highlight">high-performance systems</span> with modern technologies.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#contact" class="btn btn-primary btn-lg px-4 py-3 smooth-scroll tech-btn">
+                                <i class="bi bi-envelope me-2"></i>Contact Me
+                                <div class="btn-shine"></div>
+                            </a>
+                            <a href="#projects" class="btn btn-outline-primary btn-lg px-4 py-3 smooth-scroll">
+                                <i class="bi bi-code-square me-2"></i>View Projects
+                            </a>
+                        </div>
+                        <div class="tech-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="5">0</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="3">0</div>
+                                <div class="stat-label">Years</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="100">0</div>
+                                <div class="stat-label">% Quality</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual">
+                        <div class="developer-image-container">
+                            <div class="image-frame">
+                                <img src="assets/images/developer.jpg" alt="Usama Razzaq - Full Stack Developer" class="developer-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="image-placeholder" style="display: none;">
+                                    <div class="placeholder-icon">
+                                        <i class="bi bi-person-gear"></i>
+                                    </div>
+                                    <p>Professional Developer Image</p>
+                                    <small>Add your photo to assets/images/developer.jpg</small>
+                                </div>
+                            </div>
+                            <div class="image-decoration">
+                                <div class="decoration-circle circle-1"></div>
+                                <div class="decoration-circle circle-2"></div>
+                                <div class="decoration-circle circle-3"></div>
+                            </div>
+                        </div>
+                        <div class="code-window">
+                            <div class="window-header">
+                                <div class="window-controls">
+                                    <span class="control red"></span>
+                                    <span class="control yellow"></span>
+                                    <span class="control green"></span>
+                                </div>
+                                <div class="window-title">terminal.js</div>
+                            </div>
+                            <div class="window-content">
+                                <div class="code-line">
+                                    <span class="code-comment">// Building amazing apps...</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+                                </div>
+                                <div class="code-line indent">
+                                    <span class="code-property">name</span>: <span class="code-string">"Usama Razzaq"</span>,
+                                </div>
+                                <div class="code-line indent">
+                                    <span class="code-property">skills</span>: [<span class="code-string">"Laravel"</span>, <span class="code-string">"Flutter"</span>],
+                                </div>
+                                <div class="code-line indent">
+                                    <span class="code-property">passion</span>: <span class="code-string">"Clean Code"</span>
+                                </div>
+                                <div class="code-line">};</div>
+                                <div class="cursor-blink">|</div>
+                            </div>
+                        </div>
+                        <div class="floating-icons">
+                            <div class="floating-icon laravel-icon">
+                                <i class="fab fa-laravel"></i>
+                            </div>
+                            <div class="floating-icon flutter-icon">
+                                <i class="fab fa-flutter"></i>
+                            </div>
+                            <div class="floating-icon js-icon">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <div class="floating-icon php-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">About Me</h2>
+                    <p class="lead">
+                        I'm a passionate software engineer with expertise in Laravel and Flutter. I build scalable APIs, cross-platform mobile apps, and high-performance systems with clean code and attention to detail.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 skills-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-5">
+                        <span class="title-text">Skills & Technologies</span>
+                        <div class="title-underline"></div>
+                    </h2>
+                    <div class="skills-grid">
+                        <div class="skill-card" data-skill="Laravel">
+                            <div class="skill-icon">
+                                <i class="fab fa-laravel"></i>
+                            </div>
+                            <div class="skill-name">Laravel</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="95"></div>
+                                </div>
+                                <span class="level-text">95%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="Flutter">
+                            <div class="skill-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="skill-name">Flutter</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="90"></div>
+                                </div>
+                                <span class="level-text">90%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="JavaScript">
+                            <div class="skill-icon">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <div class="skill-name">JavaScript</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="88"></div>
+                                </div>
+                                <span class="level-text">88%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="PHP">
+                            <div class="skill-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="skill-name">PHP</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="92"></div>
+                                </div>
+                                <span class="level-text">92%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="MySQL">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="skill-name">MySQL</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="85"></div>
+                                </div>
+                                <span class="level-text">85%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="CodeIgniter">
+                            <div class="skill-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="skill-name">CodeIgniter</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="80"></div>
+                                </div>
+                                <span class="level-text">80%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="Bootstrap">
+                            <div class="skill-icon">
+                                <i class="fab fa-bootstrap"></i>
+                            </div>
+                            <div class="skill-name">Bootstrap 5</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="90"></div>
+                                </div>
+                                <span class="level-text">90%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card" data-skill="API">
+                            <div class="skill-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="skill-name">RESTful APIs</div>
+                            <div class="skill-level">
+                                <div class="level-bar">
+                                    <div class="level-fill" data-level="93"></div>
+                                </div>
+                                <span class="level-text">93%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="additional-skills">
+                        <h4 class="mb-3">Additional Technologies</h4>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Stripe Payments</span>
+                            <span class="skill-tag">Square API</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                            <span class="skill-tag">jQuery</span>
+                            <span class="skill-tag">AJAX</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Responsive Design</span>
+                            <span class="skill-tag">API Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 projects-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-5">
+                        <span class="title-text">Featured Projects</span>
+                        <div class="title-underline"></div>
+                    </h2>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- EventGo Project -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card h-100" data-project="eventgo">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="bi bi-calendar-event"></i>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-badge live">Live</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4 class="project-title">EventGo</h4>
+                            <p class="project-subtitle">Event Booking App</p>
+                            <p class="project-description">
+                                Complete Laravel backend with authentication (Sanctum), event hosting, booking, invites, and Square payment integration. Also built Flutter front end and API integrations.
+                            </p>
+                            <div class="project-features">
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Authentication System</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Payment Integration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Cross-Platform App</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-tech">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">Flutter</span>
+                                <span class="tech-tag">Square API</span>
+                                <span class="tech-tag">Sanctum</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://eventgo-live.com" target="_blank" class="project-link">
+                                    <i class="bi bi-eye"></i>
+                                    <span>View</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-glow"></div>
+                    </div>
+                </div>
+
+                <!-- WAW App Project -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card h-100" data-project="waw">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="bi bi-grid-3x3-gap"></i>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-badge development">In Development</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4 class="project-title">WAW App</h4>
+                            <p class="project-subtitle">Multi-Module Platform</p>
+                            <p class="project-description">
+                                Multi-module system (events, real estate, services) with unified Laravel API, map-based discovery, and Figma-to-Flutter UI.
+                            </p>
+                            <div class="project-features">
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Multi-Module System</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Map Integration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Unified API</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-tech">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">Flutter</span>
+                                <span class="tech-tag">Maps API</span>
+                                <span class="tech-tag">Figma</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://waw-maroc.com/" target="_blank" class="project-link">
+                                    <i class="bi bi-eye"></i>
+                                    <span>View</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-glow"></div>
+                    </div>
+                </div>
+
+                <!-- MUNU.Events Project -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card h-100" data-project="munu">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="project-status">
+                                <span class="status-badge live">Live</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h4 class="project-title">MUNU.Events</h4>
+                            <p class="project-subtitle">Conference Management System</p>
+                            <p class="project-description">
+                                Full system for managing conferences, committees, and applicants. Frontend: HTML, CSS, Bootstrap 5, JS, jQuery, AJAX. Backend: Laravel + MySQL + Stripe.
+                            </p>
+                            <div class="project-features">
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Conference Management</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Stripe Integration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Responsive Design</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-tech">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">Bootstrap 5</span>
+                                <span class="tech-tag">jQuery</span>
+                                <span class="tech-tag">Stripe</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://mun.events" target="_blank" class="project-link">
+                                    <i class="bi bi-eye"></i>
+                                    <span>View</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-5">Get In Touch</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row g-4">
+                        <!-- Contact Info -->
+                        <div class="col-md-12">
+                            <div class="contact-info">
+                                <h4 class="mb-4">Contact Information</h4>
+                                <div class="contact-item">
+                                    <i class="bi bi-envelope-fill text-primary"></i>
+                                    <div>
+                                        <strong>Email</strong>
+                                        <p>usamarazzaq092@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-telephone-fill text-primary"></i>
+                                    <div>
+                                        <strong>Phone</strong>
+                                        <p>+92 304 5896292</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-geo-alt-fill text-primary"></i>
+                                    <div>
+                                        <strong>Location</strong>
+                                        <p>Pakistan</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; <script>document.write(new Date().getFullYear())</script> Usama Razzaq. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Full Stack Laravel & Flutter Developer</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

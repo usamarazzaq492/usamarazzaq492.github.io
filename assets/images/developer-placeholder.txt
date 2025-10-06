@@ -1,0 +1,20 @@
+# Professional Developer Image
+
+To add your professional photo:
+
+1. Save your professional headshot as "developer.jpg" in this folder
+2. Recommended image specifications:
+   - Size: 400x400 pixels (square format)
+   - Format: JPG or PNG
+   - Quality: High resolution
+   - Style: Professional headshot with neutral background
+   - Dress: Business casual or formal attire
+
+3. Alternative: Use a professional photo service like:
+   - Unsplash: https://unsplash.com/s/photos/professional-developer
+   - Pexels: https://www.pexels.com/search/professional%20developer/
+   - Or take a professional headshot
+
+4. The image will automatically display once you add "developer.jpg" to this folder
+
+Current placeholder will show until you add your image.
